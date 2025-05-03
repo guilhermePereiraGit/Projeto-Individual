@@ -1,5 +1,5 @@
-/*------------------------------- CSS Index -------------------------------*/
-/* Configuração geral */
+/*----------------------------- CSS HomePage ------------------------------*/
+
 body {
     padding: 0;
     margin: 0;
@@ -67,6 +67,61 @@ body {
 
 .main h1 {
     color: #333;
+}
+
+/*------------------------------- CSS Index -------------------------------*/
+/* Configuração geral */
+body {
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+    background-color: #e9e9e9;
+}
+
+/* Header */
+
+#main-headerIndex {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-containerIndex {
+    margin-top: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-containerIndex a {
+    font-family: 'Press Start 2P';
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+    transition: 0.3s;
+    text-shadow: 2px 2px 4px #000; 
+}
+
+.nav-containerIndex a:hover {
+    color: #00ccff;
+}
+
+.nav-containerIndex a:hover::before {
+    color: #00ccff;
+    content: '> ';
+}
+
+/* Main */
+
+.bannerIndex {
+    width: 100%;
+    height: 654px;
+    background-image: url(./img/seaofstarsbanner-Photoroom.png);
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 /*-------------------------- CSS linha-do-tempo ---------------------------*/
