@@ -10,10 +10,10 @@ body {
 }
 
 .banner {
-    background-image: url(./img/fundo-papel.png);
+    background-image: url(./img/fundoMain2.png);
     background-size: cover;
     background-repeat: repeat;
-    height: 700px;
+    height: auto;
     width: 100%;
 }
 
@@ -26,6 +26,7 @@ body {
     width: 100%;
     margin-top: 0.5%;
     padding: 5px 0;
+    z-index: 1000;
 }
 
 .nav-container {
@@ -76,7 +77,7 @@ body {
 
 .nav-container a:hover,
 .nav-container .div_esquerda div:hover {
-    background-image: linear-gradient(rgb(156, 19, 183), rgb(255, 154, 52));
+    background-color: rgb(165, 27, 105);
     color: #F6EEE2;
 }
 
@@ -162,57 +163,108 @@ body {
 
 /*-------------------------- CSS linha-do-tempo ---------------------------*/
 
-.mainTimeLine {
-
-}
-
+/* The actual timeline (the vertical ruler) */
 .timeline {
+    padding-top: 10%;
     position: relative;
-    max-width: 900px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 50px 0;
+    text-align: center;
 }
 
+.timeline h1 {
+    align-self: center;
+    position: relative;
+    z-index: 2;
+}
+
+/* The actual timeline (the vertical ruler) */
 .timeline::after {
+    margin-top: 20%;
     content: '';
     position: absolute;
-    width: 20px;
-    background: #0ff;
+    width: 10px;
+    background-color: white;
     top: 0;
     bottom: 0;
     left: 50%;
-    margin-left: -10px;
+    margin-left: -5px;
 }
 
+/* Container around content */
 .container {
-    padding: 20px 40px;
+    padding: 10px 40px;
     position: relative;
+    background-color: inherit;
     width: 50%;
 }
 
-.container::before {
-    content: "";
+/* The circles on the timeline */
+.container::after {
+    content: '';
     position: absolute;
-    width: 20px;
-    height: 20px;
-    right: -10px;
-    background-color: #0ff;
-    border: 4px solid #222;
-    top: 20px;
+    width: 25px;
+    height: 25px;
+    right: -17px;
+    background-color: white;
+    border: 4px solid #FF9F55;
+    top: 15px;
     border-radius: 50%;
     z-index: 1;
-  }
+}
 
-  .content {
-    padding: 20px;
-    background: #222;
-    border-radius: 10px;
+/* Place the container to the left */
+.left {
+    right: 6.7%;
+}
+
+/* Place the container to the right */
+.right {
+    left: 50%;
+}
+
+/* Add arrows to the left container (pointing right) */
+.left::before {
+    content: " ";
+    height: 0;
+    position: absolute;
+    top: 22px;
+    width: 0;
+    z-index: 1;
+    right: 30px;
+    border: medium solid white;
+    border-width: 10px 0 10px 10px;
+    border-color: transparent transparent transparent white;
+}
+
+/* Add arrows to the right container (pointing left) */
+.right::before {
+    content: " ";
+    height: 0;
+    position: absolute;
+    top: 22px;
+    width: 0;
+    z-index: 1;
+    left: 30px;
+    border: medium solid white;
+    border-width: 10px 10px 10px 0;
+    border-color: transparent white transparent transparent;
+}
+
+/* Fix the circle for containers on the right side */
+.right::after {
+    left: -16px;
+}
+
+/* The actual content */
+.content {
+    text-align: justify;
+    padding: 20px 30px;
+    background-color: white;
+    height: 200px;
     position: relative;
-    background-size: cover;
-    background-position: center;
-    color: #fff;
-    box-shadow: 0 4px 10px rgba(0, 255, 255, 0.3);
-  }
+    border-radius: 6px;
+}
 
 /*------------------------------- CSS login -------------------------------*/
 
