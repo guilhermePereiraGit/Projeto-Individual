@@ -26,8 +26,7 @@ function cadastrar(req, res) {
   } else if (idUsuario == undefined) {
     res.status(400).send("idUsuario está undefined!");
   } else {
-
-
+    
     aquarioModel.cadastrar(descricao, idUsuario)
       .then((resultado) => {
         res.status(201).json(resultado);

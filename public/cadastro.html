@@ -39,38 +39,38 @@
             <div class="divPersonagens">
                 <div class="divCima">
                     <label class="personagem-option">
-                        <input type="radio" id="1" name="personagens">
-                        <img src="../public/assets/portrait-valere.png" class="personagem-img">
+                        <input type="radio" id="Valere" name="personagens" value="1">
+                        <img src="./assets/portrait-valere.png" class="personagem-img">
                     </label>
                     <label class="personagem-option">
-                        <input type="radio" id="2" name="personagens">
-                        <img src="../public/assets/portrait-zale.png" class="personagem-img">
+                        <input type="radio" id="Zale" name="personagens" value="2">
+                        <img src="./assets/portrait-zale.png" class="personagem-img">
                     </label>
                     <label class="personagem-option">
-                        <input type="radio" id="3" name="personagens">
-                        <img src="../public/assets/portrait-garl.png" class="personagem-img">
+                        <input type="radio" id="Garl" name="personagens" value="3">
+                        <img src="./assets/portrait-garl.png" class="personagem-img">
                     </label>
                     <label class="personagem-option">
-                        <input type="radio" id="4" name="personagens">
-                        <img src="../public/assets/portrait-serai.png" class="personagem-img">
+                        <input type="radio" id="Serai" name="personagens" value="4">
+                        <img src="./assets/portrait-serai.png" class="personagem-img">
                     </label>
                 </div>
                 <div class="divBaixo">
                     <label class="personagem-option">
-                        <input type="radio" id="5" name="personagens">
-                        <img src="../public/assets/portrait-brugalves.png" class="personagem-img">
+                        <input type="radio" id="Brugalves" name="personagens" value="5">
+                        <img src="./assets/portrait-brugalves.png" class="personagem-img">
                     </label>
                     <label class="personagem-option">
-                        <input type="radio" id="6" name="personagens">
-                        <img src="../public/assets/portrait-erlina.png" class="personagem-img">
+                        <input type="radio" id="Erlina" name="personagens" value="6">
+                        <img src="./assets/portrait-erlina.png" class="personagem-img">
                     </label>
                     <label class="personagem-option">
-                        <input type="radio" id="7" name="personagens">
-                        <img src="../public/assets/portrait-moraine.png" class="personagem-img">
+                        <input type="radio" id="Moraine" name="personagens" value="7">
+                        <img src="./assets/portrait-moraine.png" class="personagem-img">
                     </label>
                     <label class="personagem-option">
-                        <input type="radio" id="8" name="personagens">
-                        <img src="../public/assets/portrait-teaks.png" class="personagem-img">
+                        <input type="radio" id="Teaks" name="personagens" value="8">
+                        <img src="./assets/portrait-teaks.png" class="personagem-img">
                     </label>
                 </div>
             </div>
@@ -113,20 +113,66 @@
         var emailVar = iptEmail.value;
         var senhaVar = iptSenha.value;
         var senhaConfirmadaVar = iptConfirmarSenha.value;
+        var personagemFavVar = document.getElementsByName('personagens');
+
 
         // Verificando se há algum campo em branco
         if (
             nomeVar == "" ||
             emailVar == "" ||
             senhaVar == "" ||
-            senhaConfirmadaVar == ""
+            senhaConfirmadaVar == "" ||
+            personagemFavVar == ""
         ) {
             cardErro.style.display = "block";
             mensagem_erro.innerHTML =
-                "(Mensagem de erro para todos os campos em branco)";
+                "(Preencha os campos em branco)";
 
             finalizarAguardar()
             return false;
+
+        } else if (!emailVar.includes('@') || !emailVar.includes('.')) {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML = "(Email inválido!)";
+            console.log("Email inválido!");
+            finalizarAguardar()
+            return res.status(400).send("Email inválido!");
+
+        } else if (senhaVar == undefined) {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML = "(Preencha o campo senha!)";
+            console.log("Preencha o campo senha!");
+            finalizarAguardar()
+            return res.status(400).send("Preencha o campo senha!");
+
+        } else if (senhaVar.length < 6) {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML = "(Sua senha deve ter 6 ou mais caracteres!)";
+            console.log("Sua senha deve ter 6 ou mais caracteres");
+            finalizarAguardar()
+            return res.status(400).send("Sua senha deve ter 6 ou mais caracteres");
+
+        } else if (senhaConfirmadaVar == undefined) {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML = "(Confirme sua senha!)";
+            console.log("Confirme sua senha!");
+            finalizarAguardar()
+            return res.status(400).send("Confirme sua senha!");
+
+        } else if (senhaVar !== senhaConfirmadaVar) {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML = "(As senhas não coincidem!)";
+            console.log("As senhas não coincidem!");
+            finalizarAguardar()
+            return res.status(400).send("As senhas não coincidem!");
+
+        } else if (personagemFavVar == undefined || personagemFavVar == null) {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML = "(Escolha um personagem favorito!)";
+            console.log("Escolha um personagem favorito!");
+            finalizarAguardar()
+            return res.status(400).send("Escolha um personagem favorito!");
+
         } else {
             setInterval(sumirMensagem, 5000);
         }
@@ -143,7 +189,7 @@
                 nomeServer: nomeVar,
                 emailServer: emailVar,
                 senhaServer: senhaVar,
-                senhaConfirmada: senhaConfirmadaVar
+                personagemFavServer: personagemFavVar
             }),
         })
             .then(function (resposta) {
@@ -166,11 +212,6 @@
                 }
             })
             .catch(function (resposta) {
-                console.error("Erro completo:", {
-                    status: erro.status,
-                    message: erro.message,
-                    response: erro.response
-                });
                 console.log(`#ERRO: ${resposta}`);
                 finalizarAguardar();
             });

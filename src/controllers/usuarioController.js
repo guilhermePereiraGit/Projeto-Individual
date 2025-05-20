@@ -56,9 +56,7 @@ function cadastrar(req, res) {
     var nome = req.body.nomeServer;
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
-
-    console.log(nome, email, senha);
-    
+    var personagemFav = req.body.personagemFavServer
 
     // Faça as validações dos valores
     if (nome == undefined || nome == "") {
@@ -70,25 +68,10 @@ function cadastrar(req, res) {
     } else if (email == undefined) {
         console.log("Preencha o campo e-mail!");
         return res.status(400).send("Preencha o campo e-mail!");
-    } else if (!email.includes('@') || !email.includes('.')) {
-        console.log("Email inválido!");
-        return res.status(400).send("Email inválido!");
-    } else if (senha == undefined) {
-        console.log("Preencha o campo senha!");
-        return res.status(400).send("Preencha o campo senha!");
-    } else if (senha.length < 6) {
-        console.log("Sua senha deve ter 6 ou mais caracteres");
-        return res.status(400).send("Sua senha deve ter 6 ou mais caracteres");
-    } /*else if (confirmarSenha == undefined) {
-        console.log("Confirme sua senha!");
-        return res.status(400).send("Confirme sua senha!");
-    } else if (senha !== confirmarSenha) {
-        console.log("As senhas não coincidem!");
-        return res.status(400).send("As senhas não coincidem!");
-    } */else {
+    } else {
     
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar(nome, email, senha)
+        usuarioModel.cadastrar(nome, email, senha, personagemFav)
             .then(
                 function (resultado) {
                     res.json(resultado);
