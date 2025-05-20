@@ -26,7 +26,6 @@ function autenticar(req, res) {
                                     res.json({
                                         id: resultadoAutenticar[0].id,
                                         email: resultadoAutenticar[0].email,
-                                        cpf: resultadoAutenticar[0].cpf,
                                         nome: resultadoAutenticar[0].nome,
                                         senha: resultadoAutenticar[0].senha,
                                         aquarios: resultadoAquarios
@@ -56,34 +55,40 @@ function cadastrar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var nome = req.body.nomeServer;
     var email = req.body.emailServer;
-    var cpf = req.body.cpfServer;
     var senha = req.body.senhaServer;
-    var confirmarSenha = req.body.confirmarSenhaServer;
-    var fkEmpresa = req.body.idEmpresaVincularServer;
 
-
+    console.log(nome, email, senha);
     
-    // Faça as validações dos valores
-    if (nome == undefined) {
-        res.status(400).send("Seu nome está undefined!");
-    } else if (nome.length <= 1) {
-        res.status(400).send("Seu nome deve ter mais de 1 caractere");
-    } else if (email == undefined) {
-        res.status(400).send("Seu email está undefined!");
-    } else if (!email.includes('@')) {
-        res.status(400).send("Seu email deve ter um @");
-    } else if (cpf == undefined) {
-        res.status(400).send("Seu cpf está undefined!");
-    } else if (senha == undefined) {
-        res.status(400).send("Sua senha está undefined!");
-    } else if (senha > 6) {
-        res.status(400).send("Sua senha deve ter mais de 6 caracteres");
-    } else if (fkEmpresa == undefined) {
-        res.status(400).send("Sua empresa a vincular está undefined!");
-    } else {
 
+    // Faça as validações dos valores
+    if (nome == undefined || nome == "") {
+        console.log("Preencha o campo nome!");
+        return res.status(400).send("Preencha o campo nome!");
+    } else if (nome.length <= 1) {
+        console.log("Seu nome deve ter mais de 1 caractere");
+        return res.status(400).send("Seu nome deve ter mais de 1 caractere");
+    } else if (email == undefined) {
+        console.log("Preencha o campo e-mail!");
+        return res.status(400).send("Preencha o campo e-mail!");
+    } else if (!email.includes('@') || !email.includes('.')) {
+        console.log("Email inválido!");
+        return res.status(400).send("Email inválido!");
+    } else if (senha == undefined) {
+        console.log("Preencha o campo senha!");
+        return res.status(400).send("Preencha o campo senha!");
+    } else if (senha.length < 6) {
+        console.log("Sua senha deve ter 6 ou mais caracteres");
+        return res.status(400).send("Sua senha deve ter 6 ou mais caracteres");
+    } /*else if (confirmarSenha == undefined) {
+        console.log("Confirme sua senha!");
+        return res.status(400).send("Confirme sua senha!");
+    } else if (senha !== confirmarSenha) {
+        console.log("As senhas não coincidem!");
+        return res.status(400).send("As senhas não coincidem!");
+    } */else {
+    
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar(nome, email, cpf, senha, fkEmpresa)
+        usuarioModel.cadastrar(nome, email, senha)
             .then(
                 function (resultado) {
                     res.json(resultado);

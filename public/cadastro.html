@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
     <link rel="stylesheet" href="./css/style.css">
-    <script src="./js/main.js"></script>
+    <script src="./js/sessao.js"></script>
 </head>
 
 <body>
@@ -35,35 +35,71 @@
         </div>
 
         <div class="mainCadastro">
+
             <div class="divPersonagens">
                 <div class="divCima">
-                    <button onclick="personagemFav()"><img src=""></button>
-                    <button onclick="personagemFav()"><img src=""></button>
-                    <button onclick="personagemFav()"><img src=""></button>
-                    <button onclick="personagemFav()"><img src=""></button>
-                    <button onclick="personagemFav()"><img src=""></button>
+                    <label class="personagem-option">
+                        <input type="radio" id="1" name="personagens">
+                        <img src="../public/assets/portrait-valere.png" class="personagem-img">
+                    </label>
+                    <label class="personagem-option">
+                        <input type="radio" id="2" name="personagens">
+                        <img src="../public/assets/portrait-zale.png" class="personagem-img">
+                    </label>
+                    <label class="personagem-option">
+                        <input type="radio" id="3" name="personagens">
+                        <img src="../public/assets/portrait-garl.png" class="personagem-img">
+                    </label>
+                    <label class="personagem-option">
+                        <input type="radio" id="4" name="personagens">
+                        <img src="../public/assets/portrait-serai.png" class="personagem-img">
+                    </label>
                 </div>
                 <div class="divBaixo">
-                    <button onclick="personagemFav()"><img src=""></button>
-                    <button onclick="personagemFav()"><img src=""></button>
-                    <button onclick="personagemFav()"><img src=""></button>
-                    <button onclick="personagemFav()"><img src=""></button>
-                    <button onclick="personagemFav()"><img src=""></button>
+                    <label class="personagem-option">
+                        <input type="radio" id="5" name="personagens">
+                        <img src="../public/assets/portrait-brugalves.png" class="personagem-img">
+                    </label>
+                    <label class="personagem-option">
+                        <input type="radio" id="6" name="personagens">
+                        <img src="../public/assets/portrait-erlina.png" class="personagem-img">
+                    </label>
+                    <label class="personagem-option">
+                        <input type="radio" id="7" name="personagens">
+                        <img src="../public/assets/portrait-moraine.png" class="personagem-img">
+                    </label>
+                    <label class="personagem-option">
+                        <input type="radio" id="8" name="personagens">
+                        <img src="../public/assets/portrait-teaks.png" class="personagem-img">
+                    </label>
                 </div>
             </div>
             <div class="divInputs">
+                <div class="alerta_erro">
+                    <div class="card_erro" id="cardErro">
+                        <span id="mensagem_erro"></span>
+                    </div>
+                </div>
                 <h1 class="titulo">Cadastre-se</h1>
 
                 <label for="iptNome">Digite seu Nome: </label>
                 <input type="text" id="iptNome">
+
                 <label for="iptEmail">Digite seu email: </label>
                 <input type="text" id="iptEmail">
+
                 <label for="iptSenha">Digite sua senha: </label>
                 <input type="text" id="iptSenha">
+
                 <label for="iptConfirmarSenha">Confirme sua senha: </label>
                 <input type="text" id="iptConfirmarSenha">
+
+                <button class="botao" onclick="cadastrar()">Cadastrar</button>
             </div>
         </div>
+    </div>
+    <div id="div_aguardar" class="loading-div">
+        <img src="../public/assets/imgs/img-loading-b-230203.gif" id="loading-gif" />
     </div>
 
 </body>
@@ -88,6 +124,8 @@
             cardErro.style.display = "block";
             mensagem_erro.innerHTML =
                 "(Mensagem de erro para todos os campos em branco)";
+
+            finalizarAguardar()
             return false;
         } else {
             setInterval(sumirMensagem, 5000);
@@ -120,12 +158,21 @@
                     setTimeout(() => {
                         window.location = "login.html";
                     }, "2000");
+
+                    limparFormulario();
+                    finalizarAguardar();
                 } else {
                     throw "Houve um erro ao tentar realizar o cadastro!";
                 }
             })
             .catch(function (resposta) {
+                console.error("Erro completo:", {
+                    status: erro.status,
+                    message: erro.message,
+                    response: erro.response
+                });
                 console.log(`#ERRO: ${resposta}`);
+                finalizarAguardar();
             });
 
         return false;
@@ -136,4 +183,5 @@
     }
 </script>
 </script>
+
 </html>
