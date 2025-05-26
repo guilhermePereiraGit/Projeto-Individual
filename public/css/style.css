@@ -73,6 +73,21 @@ body {
     color: #F6EEE2;
 }
 
+/* Footer */
+.footer {
+  background-color: #32b9cd;
+  height: 130px;
+  justify-content: center;
+  color: #fff;
+  display: flex;
+  font-size: 15px;
+}
+
+.footer .containerFooter {
+  justify-content: center;
+  text-align: center;
+}
+
 /* Error */
 
 .alerta_erro {
@@ -189,7 +204,6 @@ body {
     width: 100%;
 }
 
-/* The actual timeline (the vertical ruler) */
 .timeline {
     padding-top: 10%;
     position: relative;
@@ -204,7 +218,6 @@ body {
     z-index: 2;
 }
 
-/* The actual timeline (the vertical ruler) */
 .timeline::after {
     margin-top: 25%;
     content: '';
@@ -215,6 +228,7 @@ body {
     bottom: 0;
     left: 50%;
     margin-left: -5px;
+    max-height: 90%;
 }
 
 .containerContainer {
@@ -230,7 +244,6 @@ body {
     width: 50%;
 }
 
-/* Container around content */
 .container {
     padding: 10px 40px;
     position: relative;
@@ -238,7 +251,6 @@ body {
     width: 50%;
 }
 
-/* The circles on the timeline */
 .container::after {
     content: '';
     position: absolute;
@@ -252,7 +264,6 @@ body {
     z-index: 1;
 }
 
-/* Add arrows to the left container (pointing right) */
 .left::before {
     content: " ";
     height: 0;
@@ -266,7 +277,6 @@ body {
     border-color: transparent transparent transparent wheat;
 }
 
-/* Add arrows to the right container (pointing left) */
 .right::before {
     content: " ";
     height: 0;
@@ -281,12 +291,10 @@ body {
     border-color: transparent white transparent transparent;
 }
 
-/* Fix the circle for containers on the right side */
 .right::after {
     left: -16px;
 }
 
-/* The actual content */
 .content {
     text-align: justify;
     padding: 20px 30px;
@@ -356,6 +364,8 @@ body {
     height: 100px;
     border-radius: 50%;
     object-fit: cover;
+    background-image: url("../assets/fundoMain2.png");
+    background-size: cover;
     border: 3px solid transparent;
     transition: all 0.3s ease;
 }
