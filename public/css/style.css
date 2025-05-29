@@ -1,6 +1,10 @@
 /*----------------------------- CSS Header ------------------------------*/
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     padding: 0;
     margin: 0;
@@ -16,8 +20,6 @@ body {
     top: 0;
     justify-content: center;
     width: 100%;
-    margin-top: 0.5%;
-    padding: 5px 0;
     z-index: 1000;
 }
 
@@ -25,12 +27,11 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 95%;
+    width: 100%;
     padding: 0px 20px;
     border: 2px;
     border-color: rgb(70, 14, 32);
     border-style: solid;
-    border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     background-color: #760645;
 }
@@ -45,6 +46,7 @@ body {
 .div_esquerda img {
     height: 50px;
     width: auto;
+    transform: 1s;
     display: block;
 }
 
@@ -67,10 +69,12 @@ body {
     height: 100%;
 }
 
-.nav-container a:hover,
-.nav-container .div_esquerda div:hover {
-    background-color: rgb(165, 27, 105);
-    color: #F6EEE2;
+.nav-container a:hover {
+    color: #32b9cd;
+}
+
+.nav-container .div_esquerda img:hover {
+    scale: 1.1;
 }
 
 /* Footer */
@@ -195,6 +199,16 @@ body {
 }
 
 /*-------------------------- CSS linha-do-tempo ---------------------------*/
+
+.bannerLinhaDoTempo h1{
+    color: white;
+    font-weight: 300;
+    font-size: 40px;
+}
+
+.bannerLinhaDoTempo h2{
+    
+}
 
 .bannerLinhaDoTempo {
     background-image: url(../assets/fundoMain2.png);
