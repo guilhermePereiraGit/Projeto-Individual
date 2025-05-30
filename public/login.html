@@ -33,11 +33,7 @@
 
         <div class="mainLogin">
             <div class="divInputs">
-                <div class="alerta_erro">
-                    <div class="card_erro" id="cardErro">
-                        <span id="mensagem_erro"></span>
-                    </div>
-                </div>
+
                 <h1 class="titulo">Faça seu login</h1>
 
                 <label for="iptEmail">Digite seu email: </label>
@@ -46,15 +42,19 @@
                 <input type="text" id="iptSenha">
 
                 <button onclick="entrar()">Entrar</button>
+
+                <div class="alerta_erro">
+                    <div class="card_erro" id="cardErro">
+                        <span id="mensagem_erro"></span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <div class="footer">
         <div class="containerFooter">
-            <h4>Feito por Guilherme Barros</h4>
-            <h4>Projeto Individual</h4>
-            <h4>Sptech 2025</h4>
+            <h4>Feito por Guilherme Barros --- Sptech 2025</h4>
         </div>
     </div>
 
@@ -66,7 +66,7 @@
 
         if (emailVar == "" || senhaVar == "") {
             cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            mensagem_erro.innerHTML = "Preencha os campos em branco!";
             return false;
         }
         else {
@@ -99,7 +99,7 @@
                     sessionStorage.ID_USUARIO = json.id;
 
                     setTimeout(function () {
-                        window.location = "./HomePage.html";
+                        window.location = "./dashboard.html";
                     }, 1000);
                 });
 
