@@ -90,9 +90,11 @@
 
             if (resposta.ok) {
                 console.log(resposta);
+                cardErro.style.display = "block"
+                mensagem_erro.innerHTML = "Login realizado com sucesso!";
 
                 resposta.json().then(json => {
-                        const usuario = json[0];
+                    const usuario = json[0];
                     console.log(json);
                     console.log(JSON.stringify(json));
                     sessionStorage.EMAIL_USUARIO = json.email;

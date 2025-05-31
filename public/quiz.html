@@ -64,7 +64,7 @@
             <div id="botoes" class="flex-colunar padding-8">
                 <button onclick="submeter()" id="btnSubmeter">Submeter resposta</button>
                 <button onclick="avancar()" id="btnProx" disabled>Avançar para próxima questão</button>
-                <!-- <button onclick="finalizar()" id="btnConcluir" disabled>Finalizar Quiz</button> -->
+                <button onclick="finalizar()" id="btnConcluir" disabled>Finalizar Quiz</button>
                 <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled>Tentar novamente</button>
             </div>
 
@@ -115,7 +115,7 @@
     let certas = 0
     let erradas = 0
     let quantidadeDeQuestoes = listaDeQuestoes.length
-    // let isUltima = numeroDaQuestaoAtual == quantidadeDeQuestoes-1 ? true : false
+    let isUltima = numeroDaQuestaoAtual == quantidadeDeQuestoes-1 ? true : false
 
     function onloadEsconder() {
         document.getElementById('pontuacao').style.display = "none"
@@ -133,7 +133,7 @@
 
         btnSubmeter.disabled = false
         btnProx.disabled = true
-        // btnConcluir.disabled = true
+        btnConcluir.disabled = true
         btnTentarNovamente.disabled = true
     }
 
@@ -276,19 +276,45 @@
             classComCoresParaMensagemFinal = "text-success-with-bg"
         }
 
-        textoParaMensagemFinal += "<br> Você acertou " + Math.round((porcentagemFinalDeAcertos)*100) + "% das questões."
+        textoParaMensagemFinal += "<br> Você acertou " + Math.round((porcentagemFinalDeAcertos) * 100) + "% das questões."
 
 
         document.getElementById('msgFinal').innerHTML = textoParaMensagemFinal
-        document.getElementById('msgFinal').classList.add(classComCoresParaMensagemFinal) 
+        document.getElementById('msgFinal').classList.add(classComCoresParaMensagemFinal)
         document.getElementById('spanPontuacaoFinal').innerHTML = pontuacaoFinal
 
-        document.getElementById('jogo').classList.add("text-new-gray") 
+        document.getElementById('jogo').classList.add("text-new-gray")
 
         btnProx.disabled = true
         btnSubmeter.disabled = true
-        // btnConcluir.disabled = true
+        btnConcluir.disabled = false
         btnTentarNovamente.disabled = false
 
+        cadastrarResultado()
+    }
+
+    function cadastrarResultado() {
+        var certasVar = req.body.acertosServer;
+        var errosVar = req.body.errosServer;
+        var pontuacaoFinalVar = req.body.pontuacaoFinalServer;
+
+        fetch("/quiz/cadastrarResultado", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                acertosServer: certasVar,
+                errosServer: errosVar,
+                pontuacaoFinalServer: pontuacaoFinalVar,
+                idUsuarioServer: sessionStorage.ID_USUARIO
+            })
+        }).then(res => {
+            if (res.ok) {
+                console.log("Resultado cadastrado com sucesso!");
+            } else {
+                console.error("Erro ao salvar resultado do quiz");
+            }
+        });
     }
 </script>

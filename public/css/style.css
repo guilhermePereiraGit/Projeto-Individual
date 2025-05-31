@@ -475,7 +475,7 @@ body {
     flex-direction: column;
     align-items: center;
     background-image: url(../assets/Dashboards\ banner.png);
-    height: 200vh;
+    height: 100vh;
     background-size: cover;
     padding-top: 50px;
 }
