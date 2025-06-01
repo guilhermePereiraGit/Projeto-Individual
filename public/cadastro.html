@@ -7,9 +7,13 @@
     <title>Cadastro</title>
     <link rel="stylesheet" href="./css/style.css">
     <script src="./js/sessao.js"></script>
+    <script src="./js/loading.js"></script>
 </head>
 
 <body>
+    <div id="TelaLoading">
+        <img src="assets/imgs/img-loading-a-230203.gif" alt="Loading...">
+    </div>
 
     <div class="bannerCadastro">
         <div id="main-header">
@@ -98,7 +102,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
     <div class="footer">
@@ -201,6 +204,7 @@
                 console.log("resposta: ", resposta);
 
                 if (resposta.ok) {
+                    mostrarTelaLoading();
                     cardErro.style.display = "block";
 
                     mensagem_erro.innerHTML =

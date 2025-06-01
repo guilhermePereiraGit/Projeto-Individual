@@ -6,9 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exemplo - Quiz</title>
     <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/loading.js"></script>
 </head>
 
 <body onload="onloadEsconder()">
+
+    <div id="TelaLoading">
+        <img src="assets/imgs/img-loading-a-230203.gif" alt="Loading...">
+    </div>
     <div id="pontuacaoEJogo">
         <button id="btnIniciarQuiz" onclick="iniciarQuiz()">INICIAR QUIZ</button>
 
@@ -115,7 +120,7 @@
     let certas = 0
     let erradas = 0
     let quantidadeDeQuestoes = listaDeQuestoes.length
-    let isUltima = numeroDaQuestaoAtual == quantidadeDeQuestoes-1 ? true : false
+    let isUltima = numeroDaQuestaoAtual == quantidadeDeQuestoes - 1 ? true : false
 
     function onloadEsconder() {
         document.getElementById('pontuacao').style.display = "none"
@@ -289,14 +294,16 @@
         btnSubmeter.disabled = true
         btnConcluir.disabled = false
         btnTentarNovamente.disabled = false
+    }
 
+    function finalizar() {
         cadastrarResultado()
+        // window.location = "./dashboard.html";
     }
 
     function cadastrarResultado() {
-        var certasVar = req.body.acertosServer;
-        var errosVar = req.body.errosServer;
-        var pontuacaoFinalVar = req.body.pontuacaoFinalServer;
+        var certasVar = certas;
+        var errosVar = erradas;
 
         fetch("/quiz/cadastrarResultado", {
             method: "POST",
@@ -306,7 +313,6 @@
             body: JSON.stringify({
                 acertosServer: certasVar,
                 errosServer: errosVar,
-                pontuacaoFinalServer: pontuacaoFinalVar,
                 idUsuarioServer: sessionStorage.ID_USUARIO
             })
         }).then(res => {
@@ -315,6 +321,12 @@
             } else {
                 console.error("Erro ao salvar resultado do quiz");
             }
-        });
+        })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+                finalizarAguardar();
+            });
+
+        return false;
     }
 </script>

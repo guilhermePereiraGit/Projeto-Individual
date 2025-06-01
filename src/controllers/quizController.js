@@ -4,7 +4,6 @@ function cadastrarResultado(req, res) {
     // Recuperando dados enviados pelo front-end
     var acertos = req.body.acertosServer;
     var erros = req.body.errosServer;
-    var pontuacaoFinal = req.body.pontuacaoFinalServer;
     var idUsuario = req.body.idUsuarioServer;
 
     // Validações simples
@@ -14,7 +13,7 @@ function cadastrarResultado(req, res) {
     }
 
     // Chamada para o model
-    quizModel.cadastrarResultado(acertos, erros, pontuacaoFinal, idUsuario)
+    quizModel.cadastrarResultado(acertos, erros, idUsuario)
         .then(function (resultado) {
             res.json(resultado);
         })

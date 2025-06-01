@@ -25,7 +25,6 @@ CREATE TABLE resultado_quiz (
     id INT PRIMARY KEY AUTO_INCREMENT,
     acertos INT,
     erros INT,
-    pontuacaoFinal INT,
     dataFeito DATETIME DEFAULT CURRENT_TIMESTAMP,
     fkUsuario INT,
     CONSTRAINT fkUsuario_resultado FOREIGN KEY (fkUsuario) REFERENCES usuario(id)

@@ -7,10 +7,15 @@
     <title>Dashboards</title>
     <link rel="stylesheet" href="./css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="./js/loading.js"></script>
+    <script src="./js/sessao.js"></script>
 </head>
 
 <body onload="validarSessao()">
 
+    <div id="TelaLoading">
+        <img src="assets/imgs/img-loading-a-230203.gif" alt="Loading...">
+    </div>
     <div id="main-header">
         <div class="nav-container">
             <div class="div_esquerda">
@@ -22,7 +27,7 @@
             <div class="div_direita">
                 <a href="#">Dashboards</a>
                 <span>|</span>
-                <a href="../HomePage.html">Sair</a>
+                <a href="../HomePage.html" onclick="sair()">Sair</a>
             </div>
         </div>
     </div>
@@ -36,7 +41,14 @@
 
 </body>
 <script>
+    function sair(){
+        mostrarTelaLoading();
+        limparSessao()
+        window.location = "HomePage.html";
+    }
+
     function iniciarQuiz() {
+        mostrarTelaLoading();
         window.location = "quiz.html";
     }
 </script>

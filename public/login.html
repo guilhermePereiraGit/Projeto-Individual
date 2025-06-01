@@ -7,9 +7,13 @@
     <title>Login</title>
     <link rel="stylesheet" href="./css/style.css">
     <script src="./js/main.js"></script>
+    <script src="./js/loading.js"></script>
 </head>
 
 <body>
+    <div id="TelaLoading">
+        <img src="assets/imgs/img-loading-a-230203.gif" alt="Loading...">
+    </div>
     <div class="bannerLogin">
         <div id="main-header">
             <div class="nav-container">
@@ -89,6 +93,7 @@
             console.log("ESTOU NO THEN DO entrar()!")
 
             if (resposta.ok) {
+                mostrarTelaLoading();
                 console.log(resposta);
                 cardErro.style.display = "block"
                 mensagem_erro.innerHTML = "Login realizado com sucesso!";
@@ -108,7 +113,8 @@
                 });
 
             } else {
-
+                cardErro.style.display = "block"
+                mensagem_erro.innerHTML = "Usuario não encontrado!";
                 console.log("Houve um erro ao tentar realizar o login!");
 
                 resposta.text().then(texto => {
