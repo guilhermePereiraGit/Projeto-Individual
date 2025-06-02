@@ -1,18 +1,15 @@
 var quizModel = require("../models/quizModel");
 
 function cadastrarResultado(req, res) {
-    // Recuperando dados enviados pelo front-end
     var acertos = req.body.acertosServer;
     var erros = req.body.errosServer;
     var idUsuario = req.body.idUsuarioServer;
 
-    // Validações simples
     if (idUsuario == undefined || isNaN(idUsuario)) {
         console.log("ID do usuário inválido!");
         return res.status(400).send("ID do usuário inválido!");
     }
 
-    // Chamada para o model
     quizModel.cadastrarResultado(acertos, erros, idUsuario)
         .then(function (resultado) {
             res.json(resultado);

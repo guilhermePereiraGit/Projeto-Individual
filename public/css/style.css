@@ -414,7 +414,7 @@ body {
     border-radius: none;
     display: flex;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: 0.3s;
 }
 
 .personagem-option input {
@@ -430,7 +430,7 @@ body {
     background-image: url("../assets/fundoMain2.png");
     background-size: cover;
     border: 3px solid transparent;
-    transition: all 0.3s ease;
+    transition: 0.3s;
 }
 
 .personagem-option:hover .personagem-img {
@@ -458,8 +458,9 @@ body {
     width: 30%;
     height: 75%;
     max-width: 90%;
+    color: #ffffff;
     padding: 30px;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: #0B1D3B;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
 }
@@ -554,27 +555,31 @@ body {
     justify-content: center;
     gap: 10vh;
     color: #0B1D3B;
-    height: 100vh;
+    height: 70%;
     background-size: cover;
     padding: 50px;
+    background-image: url(../assets/fundoMain.png);
+}
+
+.dashboards .tituloGrafico {
+    margin: 0;
+    padding: 0;
 }
 
 .grafico {
     text-align: center;
-    background-color: var(--primary-brand-color);
-    justify-content: center;
-    width: 47%;
-    height: 90vh;
+    background-image: url(../assets/fundo-papel.png);
     padding: 15px;
+    border-radius: 10px;
 }
 
 #desempenhoBarra {
     width: 70%;
-    height: 50vh;
+    height: 95%;
 }
 
-#mensagemSemDados {
-    display: flex;
+.grafico div {
+    font-size: 24px;
 }
 
 /* Quiz */

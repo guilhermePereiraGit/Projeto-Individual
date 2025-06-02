@@ -1,7 +1,7 @@
 var database = require("../database/config");
 
-function obterDados(idUsuario) {
-    console.log("ACESSEI O DASHBOARD MODEL: obterDados()", idUsuario);
+function ultimoResultado(idUsuario) {
+    console.log("ACESSEI O dashboardmodel - cadastrarResultado()");
 
     var instrucaoSql = `
         SELECT acertos
@@ -11,43 +11,51 @@ function obterDados(idUsuario) {
         LIMIT 1;
     `;
 
-    var instrucaoSql2 = `
-        SELECT IFNULL(
-            (
-                SELECT acertos
-                FROM resultado_quiz
-                WHERE fkUsuario = ${idUsuario}
-                ORDER BY dataFeito DESC
-                LIMIT 1 OFFSET 1
-            ), 0
-        ) AS acertosPenultimoResul;
+    console.log("Executando SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function melhorResultado(idUsuario) {
+    console.log("ACESSEI O dashboardmodel - cadastrarResultado()");
+
+    var instrucaoSql = `
+        SELECT MAX(acertos)
+        FROM resultado_quiz
+        WHERE fkUsuario = ${idUsuario};
     `;
 
+    console.log("Executando SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
 
-    var instrucaoSql3 = `
+function mediaResultadosIndividual(idUsuario) {
+    console.log("ACESSEI O dashboardmodel - cadastrarResultado()");
+
+    var instrucaoSql = `
         SELECT AVG(acertos) AS mediaAcertos
         FROM resultado_quiz
         WHERE fkUsuario = ${idUsuario};
     `;
 
-    var instrucaoSql4 = `
+    console.log("Executando SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function mediaResultadosUsuarios() {
+    console.log("ACESSEI O dashboardmodel - cadastrarResultado()");
+
+    var instrucaoSql = `
         SELECT AVG(acertos) AS mediaGeralAcertos
         FROM resultado_quiz;
     `;
 
-    console.log("Executando a instrução SQL 1: \n" + instrucaoSql);
-    console.log("Executando a instrução SQL 2: \n" + instrucaoSql2);
-    console.log("Executando a instrução SQL 3: \n" + instrucaoSql3);
-    console.log("Executando a instrução SQL 4: \n" + instrucaoSql4);
-
-    return Promise.all([
-        database.executar(instrucaoSql),
-        database.executar(instrucaoSql2),
-        database.executar(instrucaoSql3),
-        database.executar(instrucaoSql4)
-    ]);
+    console.log("Executando SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
 }
 
 module.exports = {
-    obterDados
+    ultimoResultado,
+    melhorResultado,
+    mediaResultadosIndividual,
+    mediaResultadosUsuarios
 };

@@ -1,25 +1,75 @@
 var dashboardModel = require("../models/dashboardModel");
 
-function obterDados(req, res) {
-    console.log("Recebido na rota, req.params:", req.params); 
+function ultimoResultado(req, res) {
     var idUsuario = parseInt(req.params.idUsuario);
-    console.log("Valor de idUsuario no controller:", idUsuario); 
 
     if (idUsuario == undefined) {
-        res.status(400).send("O idUsuario está indefinido!");
+        res.status(400).send("O idUsuario está inválido ou indefinido!");
     } else {
-        dashboardModel.obterDados(idUsuario)
+        dashboardModel.ultimoResultado(idUsuario)
             .then(function (resultado) {
                 res.json(resultado);
             })
             .catch(function (erro) {
                 console.log(erro);
-                console.log("Houve um erro ao buscar a nota atual: ", erro.sqlMessage);
+                console.log("Houve um erro ao buscar o último resultado: ", erro.sqlMessage);
                 res.status(500).json(erro.sqlMessage);
             });
     }
 }
 
+function melhorResultado(req, res) {
+    var idUsuario = parseInt(req.params.idUsuario);
+
+    if (idUsuario == undefined) {
+        res.status(400).send("O idUsuario está inválido ou indefinido!");
+    } else {
+        dashboardModel.melhorResultado(idUsuario)
+            .then(function (resultado) {
+                res.json(resultado);
+            })
+            .catch(function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao buscar o melhor resultado: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            });
+    }
+}
+
+function mediaResultadosIndividual(req, res) {
+    var idUsuario = parseInt(req.params.idUsuario);
+
+    if (idUsuario == undefined) {
+        res.status(400).send("O idUsuario está inválido ou indefinido!");
+    } else {
+        dashboardModel.mediaResultadosIndividual(idUsuario) 
+            .then(function (resultado) {
+                res.json(resultado);
+            })
+            .catch(function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao buscar a média de resultados individual: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            });
+    }
+}
+
+function mediaResultadosUsuarios(req, res) {
+
+    dashboardModel.mediaResultadosUsuarios()
+        .then(function (resultado) {
+            res.json(resultado);
+        })
+        .catch(function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao buscar a média de resultados de todos os usuários: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        });
+}
+
 module.exports = {
-    obterDados
+    ultimoResultado,
+    melhorResultado,
+    mediaResultadosIndividual,
+    mediaResultadosUsuarios
 };
