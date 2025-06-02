@@ -11,7 +11,7 @@
     <script src="./js/sessao.js"></script>
 </head>
 
-<body onload="validarSessao()">
+<body onload="obterDados(), carregarGraficoBarra(), validarSessao()">
 
     <div id="TelaLoading">
         <img src="assets/imgs/img-loading-a-230203.gif" alt="Loading...">
@@ -33,15 +33,34 @@
     </div>
 
     <div class="banner">
-
         <button onclick="iniciarQuiz()">Iniciar Quiz</button>
+    </div>
+
+    <div class="dashboards">
+        <div class="grafico">
+            <h1>Desempenho no quiz</h1>
+            <canvas id="desempenhoBarra"></canvas>
+            <div id="mensagemSemDados" style="display: none; font-size: 20px; color: #333;">
+                Faça o quiz para visualizar as informações
+            </div>
+        </div>
+
+        <div class="grafico">
+            <h1>Linha do tempo</h1>
 
 
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="containerFooter">
+            <h4>Feito por Guilherme Barros --- Sptech 2025</h4>
+        </div>
     </div>
 
 </body>
 <script>
-    function sair(){
+    function sair() {
         mostrarTelaLoading();
         limparSessao()
         window.location = "HomePage.html";
@@ -51,6 +70,122 @@
         mostrarTelaLoading();
         window.location = "quiz.html";
     }
+
+    function obterDados() {
+        const idUsuario = Number(sessionStorage.ID_USUARIO);
+
+        console.log(`Frontend: Tentando obter dados para o usuário ${idUsuario}`); // Adiciona log para verificar o ID
+
+        return fetch(`/dashboard/obterDados/${idUsuario}`, { cache: 'no-store' })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Frontend: Resposta da API recebida com sucesso (status 200).');
+                    return response.json();
+                } else {
+                    // Se a resposta não for OK (ex: 404, 500), loga o status e a mensagem de erro
+                    console.error(`Frontend: Erro na resposta da API. Status: ${response.status} - ${response.statusText}`);
+                    // Tenta ler o corpo da resposta para mais detalhes, se disponível
+                    return response.text().then(errorText => {
+                        console.error(`Frontend: Detalhes do erro da API: ${errorText}`);
+                        throw new Error(`Erro na API ou dados não encontrados. Status: ${response.status}, Detalhes: ${errorText}`);
+                    }).catch(() => {
+                        // Se não conseguir ler o texto da resposta, lança um erro genérico
+                        throw new Error(`Erro na API ou dados não encontrados. Status: ${response.status}`);
+                    });
+                }
+            })
+            .catch(error => {
+                // Este catch pega erros de rede, problemas com a URL, ou o erro lançado acima
+                console.error(`Frontend: Erro na obtenção dos dados p/ gráfico (código do fetch): ${error.message}`);
+                throw error; // Propaga o erro para que carregarGraficoBarra possa tratá-lo
+            });
+    }
+
+
+    function carregarGraficoBarra() {
+        obterDados() // Esta chamada agora encontrará obterDados
+
+            .then(results => {
+                const [
+                    ultimoResultado,
+                    penultimoResultado,
+                    mediaAcertosUsuario,
+                    mediaGeralAcertos
+                ] = results;
+                console.log("11111", results)
+
+                const notaAtual = ultimoResultado[0].acertos;
+                const ultimaNota = penultimoResultado[0].acertosPenultimoResul;
+                const mediaIndividual = mediaAcertosUsuario[0].mediaAcertos;
+                const mediaGeral = mediaGeralAcertos[0].mediaGeralAcertos;
+
+                console.log("22222", notaAtual, ultimaNota, mediaIndividual, mediaGeral);
+
+
+                const canvasElement = document.getElementById('desempenhoBarra');
+                const mensagem = document.getElementById('mensagemSemDados');
+
+                const labels = ['Nota Atual', 'Penúltima Nota', 'Média Individual', 'Média Geral'];
+                const dados = [notaAtual, ultimaNota, mediaIndividual, mediaGeral];
+
+                canvasElement.style.display = 'block';
+                mensagem.style.display = 'none';
+
+                if (window.myChartInstance) {
+                    window.myChartInstance.destroy();
+                }
+
+                window.myChartInstance = new Chart(canvasElement, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Pontuação Quiz',
+                            data: dados,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(255, 205, 86, 1)',
+                                'rgba(75, 192, 192, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        legend: {
+                            display: true,
+                            position: 'top',
+                        },
+                        title: {
+                            display: false,
+                            text: 'Desempenho no Quiz'
+                        },
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true,
+                                }
+                            }],
+                            xAxes: [{
+                                ticks: {}
+                            }]
+                        }
+                    }
+                });
+
+            })
+            .catch(error => {
+                console.error('Erro ao carregar dados para o gráfico de barra:', error);
+                const canvasElement = document.getElementById('desempenhoBarra');
+                const mensagem = document.getElementById('mensagemSemDados');
+                canvasElement.style.display = 'none';
+                mensagem.style.display = 'block';
+                mensagem.innerText = 'Não foi possível carregar os dados do gráfico. Tente novamente mais tarde.';
+            });
+    }
+
 </script>
 
 </html>
