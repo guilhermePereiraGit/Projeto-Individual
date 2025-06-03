@@ -11,7 +11,7 @@
     <script src="./js/sessao.js"></script>
 </head>
 
-<body onload="carregarGraficoBarra(), validarSessao()">
+<body onload="carregarGraficoBarra(), kpiPersonagem(), validarSessao()">
 
     <div id="TelaLoading">
         <img src="assets/imgs/img-loading-a-230203.gif" alt="Loading...">
@@ -38,21 +38,21 @@
     </div>
 
     <div class="banner">
+        <h2 id="b_usuario">Bem vindo </h2>
+        <p style="color: #c58e3b;">Faça o quiz para poder ver seu desempenho!</p>
         <button onclick="iniciarQuiz()">Iniciar Quiz</button>
     </div>
 
     <div class="dashboards">
-        <div class="grafico">
-            <h1 class="tituloGrafico">Desempenho no quiz</h1>
-            <canvas id="desempenhoBarra" style="height:100%; width:40vw; min-width: 40vw; min-height: 60vh;"></canvas>
-        </div>
 
         <div class="grafico">
-            <h1 class="tituloGrafico">Gráfico linha do tempo</h1>
-            <div>
-                Em produção
-            </div>
-            <canvas id="" style="height:408px; width:40vw; min-width: 40vw; min-height: 60vh;"></canvas>
+            <h1 class="tituloGrafico">Desempenho no quiz</h1>
+            <canvas id="desempenhoBarra"
+                style="display:block; height:100%; width:40vw; min-width: 40vw; min-height: 60vh;"></canvas>
+        </div>
+
+        <div class="kpi" id="kpi">
+
         </div>
     </div>
 
@@ -68,7 +68,7 @@
     const idUsuario = sessionStorage.ID_USUARIO;
 
     console.log('Id: ', idUsuario);
-    
+
 
     function sair() {
         mostrarTelaLoading();
@@ -81,131 +81,272 @@
         window.location = "quiz.html";
     }
 
-    function ultimoResultado() {
+    function kpiPersonagem() {
+        const personagemFav = sessionStorage.FKPERSONAGEM;
 
-        fetch(`/dashboard/ultimo/${idUsuario}`, { cache: 'no-store' })
-            .then(function (response) {
+        console.log(personagemFav)
+        if (personagemFav == 1) {
+            kpi.innerHTML = `
+                <h1 class="tituloGrafico">Curiosidades</h1>
+                <p>Seu personagem favorito é a Valere</p>
+                <div class="imgPersonagem">
+                    <img src="./assets/imgs/Valere-1.gif">
+                    <img src="./assets/imgs/Valere-2.gif">
+                    <img src="./assets/imgs/Valere-3.gif">
+                </div>
+                <p><b>Comida favorita: </b>Strudel de pêssego</p>
+                <div class="curiosidade">
+                   <p><b>Curiosidade da Valere</b></p>
+                    <p>Valere é a única do grupo que tem um diário pessoal, mencionado em um diálogo opcional, onde ela anota sobre as lutas e novas táticas que podem ser usadas em combate.</p>
+                </div>
+                `
+        } else if (personagemFav == 2) {
+            kpi.innerHTML = `
+                <h1 class="tituloGrafico">Curiosidades</h1>
+                <p>Seu personagem favorito é o Zale</p>
+                <div class="imgPersonagem">
+                    <img src="./assets/imgs/Zale-1.gif">
+                    <img src="./assets/imgs/Zale-2.gif">
+                    <img src="./assets/imgs/Zale-3.gif">
+                </div>
+                <p><b>Comida favorita: </b>Sopa de tomate</p>
+                <div class="curiosidade">
+                    <p><b>Curiosidade do Zale</b></p>
+                    <p>Zale foi inicialmente pensado como protagonista único, mas os devs criaram Valere para equilibrar Sol e Lua como forças que se completam na história.</p>
+                </div>
+                `
+        } else if (personagemFav == 3) {
+            kpi.innerHTML = `
+                <h1 class="tituloGrafico">Curiosidades</h1>
+                <p>Seu personagem favorito é o Garl</p>
+                <div class="imgPersonagem">
+                    <img src="./assets/imgs/Garl-1.gif">
+                    <img src="./assets/imgs/Garl-2.gif">
+                    <img src="./assets/imgs/Garl-3.gif">
+                </div>
+                <p><b>Comida favorita: </b>Todas</p>
+                <div class="curiosidade">
+                    <p><b>Curiosidade do Garl</b></p>
+                    <p>Garl perde o olho ainda na infância, durante um ataque dos monstros Fleshmancers à sua vila, enquanto tentava proteger Zale e Valere. Mesmo sem ter habilidades mágicas ou treinamento de combate como eles, ele se colocou entre os amigos e o perigo.</p>
+                </div>
+                `
+        } else if (personagemFav == 4) {
+            kpi.innerHTML = `
+                <h1 class="tituloGrafico">Curiosidades</h1>
+                <p>Seu personagem favorito é a Capitã Klee'shaë</p>
+                <div class="imgPersonagem">
+                    <img src="./assets/imgs/Serai-1.gif">
+                    <img src="./assets/imgs/Serai-2.gif">
+                    <img src="./assets/imgs/Serai-3.gif">
+                </div>
+                <p><b>Identidade Secreta: </b>Serai</p>
+                <div class="curiosidade">
+                    <p><b>Curiosidade da Serai</b></p>
+                    <p>Serai tem tantos segredos que até mesmo depois de sua identidade secreta como Capitã Klee'shaë ser revelada ela ainda esconde grandes segredos sobre seu passado.</p>
+                </div>
+                `
+        } else if (personagemFav == 5) {
+            kpi.innerHTML = `
+                <h1 class="tituloGrafico">Curiosidades</h1>
+                <p>Seu personagem favorito é o Brugaves</p>
+                <div class="imgPersonagem">
+                    <img src="./assets/imgs/Brugaves-1.gif">
+                    <img src="./assets/imgs/Brugaves-2.gif">
+                    <img src="./assets/imgs/Brugaves-3.gif">
+                </div>
+                <p><b>Companheira Solar: </b>Erlina</p>
+                <div class="curiosidade">
+                    <p><b>Curiosidade da Brugaves</b></p>
+                    <p>Brugaves depois da trama principal do jogo é referenciado no jogo The Messenger se passando no futuro do universo Sea of Stars onde ele se torna o Barma'thazël O Demônio da Velocidade</p>
+                </div>
+                `
+        } else if (personagemFav == 6) {
+            kpi.innerHTML = `
+                <h1 class="tituloGrafico">Curiosidades</h1>
+                <p>Seu personagem favorito é a Erlina</p>
+                <div class="imgPersonagem">
+                    <img src="./assets/imgs/Erlina-1.gif">
+                    <img src="./assets/imgs/Erlina-2.gif">
+                    <img src="./assets/imgs/Erlina-3.gif">
+                </div>
+                <p><b>Companheiro Lunar: </b>Brugaves</p>
+                <div class="curiosidade">
+                    <p><b>Curiosidade do Erlina</b></p>
+                    <p>Erlina possui como sua arma de batalha prismas mágicos que se movem a sua vontade e podem canalizar o poder do sol em feixes de luz extremamente poderosos.</p>
+                </div>
+                `
+        } else if (personagemFav == 7) {
+            kpi.innerHTML = `
+                <h1 class="tituloGrafico">Curiosidades</h1>
+                <p>Seu personagem favorito é o Moraine</p>
+                <div class="imgPersonagem">
+                    <img src="./assets/imgs/Moraine-1.gif">
+                    <img src="./assets/imgs/Moraine-2.gif">
+                    <img src="./assets/imgs/Moraine-3.gif">
+                </div>
+                <p><b>Companheira Solar: </b>Moyara(Morta em combate)</p>
+                <div class="curiosidade">
+                    <p><b>Curiosidade da Moraine</b></p>
+                    <p>Moyara era a companheira solar de Moraine sendo sua Gêmea de solstício que morreu para um dos Residentes do Freshmancer em uma de suas expedições.</p>
+                </div>
+                `
+        } else if (personagemFav == 8) {
+            kpi.innerHTML = `
+                <h1 class="tituloGrafico">Curiosidades</h1>
+                <p>Seu personagem favorito é a Teaks</p>
+                <div class="imgPersonagem">
+                    <img src="./assets/imgs/Teaks-1.gif">
+                    <img src="./assets/imgs/Teaks-2.gif">
+                    <img src="./assets/imgs/Teaks-3.gif">
+                </div>
+                <p><b>Item especial: </b>Grimório da história</p>
+                <div class="curiosidade">
+                    <p><b>Curiosidade da Teaks</b></p>
+                    <p>O grimório de Teaks a mostra diversas informações de antigos portadores do grimório como exploradores e arqueólogos antigos, esse é o último grimório que guarda esses conhecimentos antigos.</p>
+                </div>
+                `
+        } else {
+            alert("Erro ao obter a fkPersonagem")
+        }
+    }
+
+    function ultimoResultado(idUsuario) {
+        return fetch(`/dashboard/ultimo/${idUsuario}`, { cache: 'no-store' })
+            .then(response => {
                 if (response.ok) {
-                    response.json().then(function (resposta) {
-                        console.log(`Dados recebidos (ultimoResultado ${idUsuario}): ${JSON.stringify(resposta)}`);
-                    });
-                } else {
-                    console.error(`Nenhum dado encontrado ou erro na API para ultimoResultado ${idUsuario}. Status: ${response.status}`);
+                    return response.json();
                 }
             })
-            .catch(function (error) {
+            .then(function (resposta) {
+                return parseInt(resposta[0].acertos);
+            })
+            .catch(error => {
                 console.error(`Erro na obtenção dos dados para ultimoResultado ${idUsuario}: ${error.message}`);
+                return 0;
             });
     }
 
-    function melhorResultado() {
-
-        fetch(`/dashboard/melhor/${idUsuario}`, { cache: 'no-store' })
-            .then(function (response) {
+    function melhorResultado(idUsuario) {
+        return fetch(`/dashboard/melhor/${idUsuario}`, { cache: 'no-store' })
+            .then(response => {
                 if (response.ok) {
-                    response.json().then(function (resposta) {
-                        console.log(`Dados recebidos (melhorResultado ${idUsuario}): ${JSON.stringify(resposta)}`);
-                    });
-                } else {
-                    console.error(`Nenhum dado encontrado ou erro na API para melhorResultado ${idUsuario}. Status: ${response.status}`);
+                    return response.json();
                 }
             })
-            .catch(function (error) {
+            .then(function (resposta) {
+                return parseInt(resposta[0].melhor);
+            })
+            .catch(error => {
                 console.error(`Erro na obtenção dos dados para melhorResultado ${idUsuario}: ${error.message}`);
+                return 0;
             });
     }
 
-    function mediaResultadosIndividual() {
-
-        fetch(`/dashboard/mediaIndividual/${idUsuario}`, { cache: 'no-store' })
-            .then(function (response) {
+    function mediaResultadosIndividual(idUsuario) {
+        return fetch(`/dashboard/mediaIndividual/${idUsuario}`, { cache: 'no-store' })
+            .then(response => {
                 if (response.ok) {
-                    response.json().then(function (resposta) {
-                        console.log(`Dados recebidos (mediaIndividual ${idUsuario}): ${JSON.stringify(resposta)}`);
-                    });
-                } else {
-                    console.error(`Nenhum dado encontrado ou erro na API para mediaIndividual ${idUsuario}. Status: ${response.status}`);
+                    return response.json();
                 }
             })
-            .catch(function (error) {
+            .then(function (resposta) {
+                return parseFloat(resposta[0].mediaAcertos);
+            })
+            .catch(error => {
                 console.error(`Erro na obtenção dos dados para mediaIndividual ${idUsuario}: ${error.message}`);
+                return 0;
             });
     }
 
     function mediaResultadosGeral() {
-
-        fetch(`/dashboard/mediaGeral`, { cache: 'no-store' })
-            .then(function (response) {
+        return fetch(`/dashboard/mediaGeral`, { cache: 'no-store' })
+            .then(response => {
                 if (response.ok) {
-                    response.json().then(function (resposta) {
-                        console.log(`Dados recebidos (mediaGeral): ${JSON.stringify(resposta)}`);
-                    });
-                } else {
-                    console.error(`Nenhum dado encontrado ou erro na API para mediaGeral. Status: ${response.status}`);
+                    return response.json()
                 }
             })
-            .catch(function (error) {
+            .then(function (resposta) {
+                return parseFloat(resposta[0].mediaGeralAcertos);
+            })
+            .catch(error => {
                 console.error(`Erro na obtenção dos dados para mediaGeral: ${error.message}`);
+                return 0;
             });
     }
 
-
-    function carregarGraficoBarra() {
-        
-
+    async function carregarGraficoBarra() {
         const canvas = document.getElementById('desempenhoBarra');
 
-        const labels = ['Nota Atual', 'Penúltima Nota', 'Média Individual', 'Média Geral'];
-        const dados = [ultimoResultado, melhorResultado, mediaIndividual, mediaGeral];
+        const idUsuario = sessionStorage.ID_USUARIO;
+        console.log("ID do Usuário:", idUsuario);
 
-        canvas.style.display = 'block';
+        const labels = ['Nota Atual', 'Melhor Nota', 'Média Individual', 'Média Geral'];
 
-        if (window.myChartInstance) {
-            window.myChartInstance.destroy();
-        }
+        try {
+            // Promise.all espera TODAS as chamadas de funções do html serem concluídas
+            // await faz com que o código espere até que todas as Promises sejam resolvidas independente do resultado.
+            // Desestruturação de objetos
+            const [ultimo, melhor, mediaIndividual, mediaGeral] = await Promise.all([
+                ultimoResultado(idUsuario),
+                melhorResultado(idUsuario),
+                mediaResultadosIndividual(idUsuario),
+                mediaResultadosGeral()
+            ]);
 
-        window.myChartInstance = new Chart(canvas, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Pontuação Quiz',
-                    data: dados,
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(255, 159, 64, 1)',
-                        'rgba(255, 205, 86, 1)',
-                        'rgba(75, 192, 192, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                legend: {
-                    display: true,
-                    hei: 30,
-                    position: 'top',
-                },
-                title: {
-                    display: false,
-                    text: 'Desempenho no Quiz'
-                },
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                        }
-                    }],
-                    xAxes: [{
-                        ticks: {}
+            const dados = [ultimo, melhor, mediaIndividual, mediaGeral];
+            console.log("Dados para o gráfico:", dados);
+
+            new Chart(canvas, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Pontuação Quiz',
+                        data: dados,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 159, 64, 1)',
+                            'rgba(255, 205, 86, 1)',
+                            'rgba(75, 192, 192, 1)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(255, 159, 64, 1)',
+                            'rgba(255, 205, 86, 1)',
+                            'rgba(75, 192, 192, 1)'
+                        ],
+                        borderWidth: 1
                     }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top',
+                        },
+                        title: {
+                            display: false,
+                            text: 'Desempenho no Quiz'
+                        }
+                    },
+                    scales: {
+                        yAxes: [{ // Para Chart.js v2.x, você usa 'yAxes' (é um array)
+                            ticks: {
+                                min: 0,
+                                max: 10,
+                            }
+                        }],
+                    }
                 }
-            }
-        });
+            });
 
+        } catch (error) {
+            console.error("Erro ao carregar os dados para o gráfico:", error);
+        }
     }
+
 
 
 </script>

@@ -19,7 +19,7 @@ function melhorResultado(idUsuario) {
     console.log("ACESSEI O dashboardmodel - cadastrarResultado()");
 
     var instrucaoSql = `
-        SELECT MAX(acertos)
+        SELECT MAX(acertos) AS melhor
         FROM resultado_quiz
         WHERE fkUsuario = ${idUsuario};
     `;
