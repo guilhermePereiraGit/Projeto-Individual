@@ -71,5 +71,5 @@ module.exports = {
     ultimoResultado,
     melhorResultado,
     mediaResultadosIndividual,
-    mediaResultadosUsuarios
+    mediaResultadosUsuarios,
 };

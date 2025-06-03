@@ -83,7 +83,7 @@
 
     function ultimoResultado() {
 
-        fetch(`/api/dashboard/ultimo/${idUsuario}`, { cache: 'no-store' })
+        fetch(`/dashboard/ultimo/${idUsuario}`, { cache: 'no-store' })
             .then(function (response) {
                 if (response.ok) {
                     response.json().then(function (resposta) {
@@ -100,7 +100,7 @@
 
     function melhorResultado() {
 
-        fetch(`/api/dashboard/melhor/${idUsuario}`, { cache: 'no-store' })
+        fetch(`/dashboard/melhor/${idUsuario}`, { cache: 'no-store' })
             .then(function (response) {
                 if (response.ok) {
                     response.json().then(function (resposta) {
@@ -117,7 +117,7 @@
 
     function mediaResultadosIndividual() {
 
-        fetch(`/api/dashboard/mediaIndividual/${idUsuario}`, { cache: 'no-store' })
+        fetch(`/dashboard/mediaIndividual/${idUsuario}`, { cache: 'no-store' })
             .then(function (response) {
                 if (response.ok) {
                     response.json().then(function (resposta) {
@@ -134,7 +134,7 @@
 
     function mediaResultadosGeral() {
 
-        fetch(`/api/dashboard/mediaGeral`, { cache: 'no-store' })
+        fetch(`/dashboard/mediaGeral`, { cache: 'no-store' })
             .then(function (response) {
                 if (response.ok) {
                     response.json().then(function (resposta) {
@@ -151,16 +151,14 @@
 
 
     function carregarGraficoBarra() {
-
+        
 
         const canvas = document.getElementById('desempenhoBarra');
-        const mensagem = document.getElementById('mensagemSemDados');
 
         const labels = ['Nota Atual', 'Penúltima Nota', 'Média Individual', 'Média Geral'];
-        const dados = [ultimoResultado(), melhorResultado(), mediaResultadosIndividual(), mediaResultadosGeral()]; // variaveis com base nas funçoes
+        const dados = [ultimoResultado, melhorResultado, mediaIndividual, mediaGeral];
 
         canvas.style.display = 'block';
-        mensagem.style.display = 'none';
 
         if (window.myChartInstance) {
             window.myChartInstance.destroy();
