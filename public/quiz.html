@@ -11,70 +11,102 @@
 
 <body onload="onloadEsconder()">
 
+
     <div id="TelaLoading">
         <img src="assets/imgs/img-loading-a-230203.gif" alt="Loading...">
     </div>
-    <div id="pontuacaoEJogo">
-        <button id="btnIniciarQuiz" onclick="iniciarQuiz()">INICIAR QUIZ</button>
-
-        <div id="pontuacao" class="flex-colunar width-fit-content border-primary">
-            <div id="pontuacaoDuranteJogo" class="flex-colunar padding-8">
-                <span class="width-fit-content">Quantidade de acertos: <span id="spanCertas"></span></span>
-                <span class="width-fit-content">Quantidade de erros: <span id="spanErradas"></span></span>
-            </div>
-            <div id="pontuacaoFinalJogo" class="flex-colunar padding-8">
-                <span id="pontuacaoFinal" class="width-fit-content">Pontuação Final:
-                    <span id="spanPontuacaoFinal">***</span>
-                </span>
-                <span id="msgFinal" class="width-fit-content">***</span>
-            </div>
-        </div>
-
-        <div id="jogo" class="width-fit-content flex-colunar border-secondary">
-
-            <div id="infoQuestao" class="padding-8">
-                <span>Questão atual: <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes"></span>
-                    questões.</span>
+    <div id="main-header">
+        <div class="nav-container">
+            <div class="div_esquerda">
+                <div>
+                    <a href="../index.html"><img src="../assets/sea-of-stars-logo.png"></a>
+                </div>
             </div>
 
-            <img src="" id="imgQuiz">
-
-            <div id="perguntaDaQuestaoAtual" class="padding-8">
-                <span id="spanQuestaoExibida" class="text-bold"></span>
+            <div class="div_direita">
+                <a href="./dashboard.html">Dashboards</a>
+                <span>|</span>
+                <a href="./HomePage.html" onclick="sair()">Sair</a>
             </div>
-
-            <div id="infoAlternativas" class="padding-8">
-                <span><em>Escolha uma opção dentre as abaixo:</em></span>
-            </div>
-
-            <div id="opcoes" class="flex-colunar padding-8">
-                <span>
-                    <input type="radio" id="primeiraOpcao" name="option" class="radio" value="alternativaA" />
-                    <label for="primeiraOpcao" class="option" id="labelOpcaoUm"></label>
-                </span>
-                <span>
-                    <input type="radio" id="segundaOpcao" name="option" class="radio" value="alternativaB" />
-                    <label for="segundaOpcao" class="option" id="labelOpcaoDois"></label>
-                </span>
-                <span>
-                    <input type="radio" id="terceiraOpcao" name="option" class="radio" value="alternativaC" />
-                    <label for="terceiraOpcao" class="option" id="labelOpcaoTres"></label>
-                </span>
-                <span>
-                    <input type="radio" id="quartaOpcao" name="option" class="radio" value="alternativaD" />
-                    <label for="quartaOpcao" class="option" id="labelOpcaoQuatro"></label>
-                </span>
-            </div>
-
-            <div id="botoes" class="flex-colunar padding-8">
-                <button onclick="submeter()" id="btnSubmeter">Submeter resposta</button>
-                <button onclick="avancar()" id="btnProx" disabled>Avançar para próxima questão</button>
-                <button onclick="finalizar()" id="btnConcluir" disabled>Finalizar Quiz</button>
-                <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled>Tentar novamente</button>
-            </div>
-
         </div>
     </div>
+    <section>
+        <div class="bannerQuiz">
+            <div id="pontuacaoEJogo">
+                <button id="btnIniciarQuiz" onclick="iniciarQuiz()">Iniciar Quiz</button>
+
+                <div id="pontuacao" class="flex-colunar width-fit-content border-primary">
+                    <div id="pontuacaoDuranteJogo" class="flex-colunar padding-8">
+                        <span class="width-fit-content">Quantidade de acertos: <span id="spanCertas"></span></span>
+                        <span class="width-fit-content">Quantidade de erros: <span id="spanErradas"></span></span>
+                    </div>
+                    <div id="pontuacaoFinalJogo" class="flex-colunar padding-8">
+                        <span id="pontuacaoFinal" class="width-fit-content">Pontuação Final:
+                            <span id="spanPontuacaoFinal">***</span>
+                        </span>
+                        <span id="msgFinal" class="width-fit-content"></span>
+                    </div>
+                </div>
+
+                <div id="jogo" class="width-fit-content flex-colunar border-secondary">
+
+                    <div class="containerQuiz">
+
+                        <div id="infoQuestao" class="padding-8">
+                            <span>Questão atual: <span id="spanNumeroDaQuestaoAtual"></span> de <span
+                                    id="qtdQuestoes"></span>
+                                questões.</span>
+                        </div>
+
+                        <div id="perguntaDaQuestaoAtual" class="padding-8">
+                            <span id="spanQuestaoExibida" class="text-bold"></span>
+                        </div>
+
+                        <div id="infoAlternativas" class="padding-8">
+                            <span><em>Escolha uma opção dentre as abaixo:</em></span>
+                        </div>
+
+                        <div id="opcoes" class="flex-colunar padding-8">
+                            <span>
+                                <input type="radio" id="primeiraOpcao" name="option" class="radio"
+                                    value="alternativaA" />
+                                <label for="primeiraOpcao" class="option" id="labelOpcaoUm"></label>
+                            </span>
+                            <span>
+                                <input type="radio" id="segundaOpcao" name="option" class="radio"
+                                    value="alternativaB" />
+                                <label for="segundaOpcao" class="option" id="labelOpcaoDois"></label>
+                            </span>
+                            <span>
+                                <input type="radio" id="terceiraOpcao" name="option" class="radio"
+                                    value="alternativaC" />
+                                <label for="terceiraOpcao" class="option" id="labelOpcaoTres"></label>
+                            </span>
+                            <span>
+                                <input type="radio" id="quartaOpcao" name="option" class="radio" value="alternativaD" />
+                                <label for="quartaOpcao" class="option" id="labelOpcaoQuatro"></label>
+                            </span>
+                        </div>
+                        <div id="botoes" class="flex-colunar padding-8">
+                            <button onclick="submeter()" id="btnSubmeter">Submeter resposta</button>
+                            <button onclick="avancar()" id="btnProx" disabled>Avançar para próxima questão</button>
+                            <button onclick="finalizar()" id="btnConcluir" disabled>Finalizar Quiz</button>
+                            <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled>Tentar
+                                novamente</button>
+                        </div>
+                    </div>
+                    <div class="div_img"><div>.</div><img src="" id="imgQuiz"><div>.</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="footer HomePage">
+            <div class="containerFooter">
+                <h4>Feito por Guilherme Barros --- Sptech 2025</h4>
+            </div>
+        </div>
+    </section>
 </body>
 
 </html>
@@ -82,32 +114,122 @@
     const listaDeQuestoes = [
 
         {
-            img: "./assets/portrait-serai.png",
-            pergunta: "Qual a identidade real da capitã ?",
-            alternativaA: "Janeiro",
-            alternativaB: "Dezembro",
-            alternativaC: "Junho",
-            alternativaD: "Agosto",
-            alternativaCorreta: "alternativaC"
+            img: "./assets/quiz-1.jpg",
+            pergunta: "Qual o nome das criaturas mais poderosas<br>criadas pelo Fleshmancer?",
+            alternativaA: "Residentes",
+            alternativaB: "Habitantes do abismo",
+            alternativaC: "Pecados",
+            alternativaD: "Monstros da carne",
+            alternativaCorreta: "alternativaA"
         },
 
         {
-            img: "",
-            pergunta: "Quantas horas tem em um dia?",
-            alternativaA: "30 horas",
-            alternativaB: "38 horas",
-            alternativaC: "48 horas",
-            alternativaD: "24 horas",
+            img: "./assets/quiz-2.webp",
+            pergunta: "Qual a real identidade da capitã Klee'shaë?",
+            alternativaA: "Resh'an",
+            alternativaB: "Seraï",
+            alternativaC: "Teaks",
+            alternativaD: "Ela não tem",
+            alternativaCorreta: "alternativaB"
+        },
+
+        {
+            img: "./assets/quiz-3.jpg",
+            pergunta: "Qual foi o monstro que deixou o Garl cego?",
+            alternativaA: "Luslug",
+            alternativaB: "Wanderer",
+            alternativaC: "Giant Slug",
+            alternativaD: "Ant Bruiser",
+            alternativaCorreta: "alternativaA"
+        },
+
+        {
+            img: "./assets/quiz-4.jpg",
+            pergunta: "Qual o nome do barco principal dos<br>protagonistas?",
+            alternativaA: "Navio",
+            alternativaB: "Going Merry",
+            alternativaC: "Holandês voador",
+            alternativaD: "Vespertine",
             alternativaCorreta: "alternativaD"
         },
 
         {
-            img: "./assets/portrait-garl.png",
-            pergunta: "Qual destes números é ímpar?",
-            alternativaA: "Dez",
-            alternativaB: "Doze",
-            alternativaC: "Oito",
-            alternativaD: "Onze",
+            img: "./assets/quiz-5.jpg",
+            pergunta: "Qual a comida favorita do Garl?",
+            alternativaA: "Sopa de tomate",
+            alternativaB: "Strudell de pêssego",
+            alternativaC: "Todas",
+            alternativaD: "Morangos",
+            alternativaCorreta: "alternativaC"
+        },
+
+        {
+            img: "./assets/quiz-6.jpg",
+            pergunta: "Qual o nome do jogo de tabuleiro<br>introduzido no jogo?",
+            alternativaA: "Engrenagens",
+            alternativaB: "Rodas",
+            alternativaC: "Máquinas de batalha",
+            alternativaD: "Calotas",
+            alternativaCorreta: "alternativaB"
+        },
+
+        {
+            img: "./assets/quiz-7.jpg",
+            pergunta: "Qual o nome da vila fundada por Garl?",
+            alternativaA: "Mirth",
+            alternativaB: "Mooncradle",
+            alternativaC: "Docarri Village",
+            alternativaD: "Lucent",
+            alternativaCorreta: "alternativaA"
+        },
+
+        {
+            img: "./assets/quiz-8.webp",
+            pergunta: "Qual a arma utilizada pela Erlina?",
+            alternativaA: "Lança",
+            alternativaB: "Prismas",
+            alternativaC: "Mangual",
+            alternativaD: "Bumerangue",
+            alternativaCorreta: "alternativaB"
+        },
+
+        {
+            img: "./assets/quiz-9.webp",
+            pergunta: "Qual o nome do dragão adormecido?",
+            alternativaA: "Sky Serpent",
+            alternativaB: "The Sleeper",
+            alternativaC: "Aephorul",
+            alternativaD: "Rocky",
+            alternativaCorreta: "alternativaB"
+        },
+
+        {
+            img: "./assets/quiz-10.jpg",
+            pergunta: "Qual o nome dos deuses que a Valere e o Zale<br>representão respectivamente:",
+            alternativaA: "Ster e Fires",
+            alternativaB: "Luana e Solen",
+            alternativaC: "Ster e Apollo",
+            alternativaD: "Solen e Marlenes",
+            alternativaCorreta: "alternativaB"
+        },
+
+        {
+            img: "./assets/quiz-11.jpg",
+            pergunta: "Qual o nome do amuleto que altera a passagem<br>dos dias?",
+            alternativaA: "Amuleto do Solstício",
+            alternativaB: "Pedra do tempo",
+            alternativaC: "Vitral do tempo",
+            alternativaD: "Pérola do sol",
+            alternativaCorreta: "alternativaA"
+        },
+
+        {
+            img: "./assets/quiz-12.jpg",
+            pergunta: "Qual o nome do livro da Teaks?",
+            alternativaA: "Grimório das eras",
+            alternativaB: "Pergaminho dos arqueólogos",
+            alternativaC: "Livro dos viajantes",
+            alternativaD: "Grimório da História",
             alternativaCorreta: "alternativaD"
         }
 
@@ -208,7 +330,7 @@
     }
 
     function tentarNovamente() {
-        // atualiza a página
+        cadastrarResultado()
         window.location.reload()
     }
 
