@@ -322,7 +322,7 @@ body {
     bottom: 0;
     left: 50%;
     margin-left: -5px;
-    max-height: 90%;
+    max-height: 89%;
 }
 
 .containerContainer {
@@ -332,6 +332,7 @@ body {
 }
 
 .containerSemBolinha {
+    opacity: 0;
     padding: 10px 40px;
     position: relative;
     background-color: inherit;
@@ -390,10 +391,11 @@ body {
 }
 
 .content {
+    text-indent: 40px;
     text-align: justify;
     padding: 0px 30px;
     background-image: url(../assets/fundo-papel.png);
-    height: 236px;
+    height: 40vhpx;
     position: relative;
     border-style: groove;
     border-radius: 6px;
@@ -402,6 +404,7 @@ body {
 .content h2 {
     font-family: "Marcellus", serif;
     font-size: 26px;
+    text-indent: 0px;
 }
 
 /*------------------------------ CSS cadastro -----------------------------*/
